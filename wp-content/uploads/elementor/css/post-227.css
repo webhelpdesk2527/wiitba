@@ -1,0 +1,16 @@
+.elementor-227 .elementor-element.elementor-element-78f498b7 > .elementor-container > .elementor-column > .elementor-widget-wrap{align-content:center;align-items:center;}.elementor-227 .elementor-element.elementor-element-78f498b7:not(.elementor-motion-effects-element-type-background), .elementor-227 .elementor-element.elementor-element-78f498b7 > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-color:var( --e-global-color-1e49b65 );}.elementor-227 .elementor-element.elementor-element-78f498b7{box-shadow:0px 0px 10px 0px rgba(0, 0, 0, 0.2);transition:background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;margin-top:0px;margin-bottom:-66px;}.elementor-227 .elementor-element.elementor-element-78f498b7 > .elementor-background-overlay{transition:background 0.3s, border-radius 0.3s, opacity 0.3s;}.elementor-227 .elementor-element.elementor-element-24b76ddd .elementor-heading-title{color:#1D3557;font-family:"Roboto", Sans-serif;font-weight:600;font-style:normal;letter-spacing:0.3px;}.elementor-227 .elementor-element.elementor-element-35d65de3 .elementor-menu-toggle{margin:0 auto;}.elementor-227 .elementor-element.elementor-element-35d65de3 .elementor-nav-menu .elementor-item{font-family:"Roboto", Sans-serif;font-weight:600;}.elementor-227 .elementor-element.elementor-element-253c41d4 .elementor-button{font-family:"Roboto", Sans-serif;font-size:17px;font-weight:600;text-shadow:0px 0px 10px rgba(0,0,0,0.3);border-radius:25px 25px 25px 25px;}@media(min-width:768px){.elementor-227 .elementor-element.elementor-element-695c4f9f{width:14.145%;}.elementor-227 .elementor-element.elementor-element-2d0ee42f{width:68.52%;}}/* Start custom CSS */.header-2 {
+ transform: translatey(-80px);
+ -moz-transition: all .3s ease!important;
+ -webkit-transition: all .3s ease!important;
+ transition: all .3s ease!important;
+}
+
+
+.elementor-sticky--effects.header-2  {
+ height: auto!important;
+ transform: translatey(0px);
+}
+
+.elementor-sticky--effects.header-1 {
+ display: none!important;
+}/* End custom CSS */
