@@ -129,9 +129,6 @@ class Table_Of_Contents extends Base_Widget {
 			[
 				'label' => esc_html__( 'Container', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
-				'ai' => [
-					'active' => false,
-				],
 				'label_block' => true,
 				'description' => esc_html__( 'This control confines the Table of Contents to heading elements under a specific container', 'elementor-pro' ),
 				'frontend_available' => true,
@@ -405,7 +402,7 @@ class Table_Of_Contents extends Base_Widget {
 			[
 				'label' => esc_html__( 'Border Width', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'range' => [
 					'px' => [
 						'max' => 20,
@@ -425,7 +422,7 @@ class Table_Of_Contents extends Base_Widget {
 			[
 				'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--box-border-radius: {{SIZE}}{{UNIT}}',
 				],
@@ -437,7 +434,6 @@ class Table_Of_Contents extends Base_Widget {
 			[
 				'label' => esc_html__( 'Padding', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--box-padding: {{SIZE}}{{UNIT}}',
 				],
@@ -449,7 +445,7 @@ class Table_Of_Contents extends Base_Widget {
 			[
 				'label' => esc_html__( 'Min Height', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'vh', 'custom' ],
+				'size_units' => [ 'px', 'vh' ],
 				'range' => [
 					'px' => [
 						'min' => 0,
@@ -536,7 +532,6 @@ class Table_Of_Contents extends Base_Widget {
 			[
 				'label' => esc_html__( 'Separator Width', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--separator-width: {{SIZE}}{{UNIT}}',
 				],
@@ -558,7 +553,7 @@ class Table_Of_Contents extends Base_Widget {
 			[
 				'label' => esc_html__( 'Max Height', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'vh', 'custom' ],
+				'size_units' => [ 'px', 'vh' ],
 				'range' => [
 					'px' => [
 						'min' => 0,
@@ -587,7 +582,7 @@ class Table_Of_Contents extends Base_Widget {
 			[
 				'label' => esc_html__( 'Indent', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
+				'size_units' => [ 'px', 'em' ],
 				'default' => [
 					'unit' => 'em',
 				],
@@ -726,7 +721,7 @@ class Table_Of_Contents extends Base_Widget {
 			[
 				'label' => esc_html__( 'Size', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
+				'size_units' => [ 'px', 'em' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--marker-size: {{SIZE}}{{UNIT}}',
 				],
@@ -739,56 +734,21 @@ class Table_Of_Contents extends Base_Widget {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		$this->add_render_attribute(
-			'header',
-			[
-				'class' => 'elementor-toc__header',
-				'aria-controls' => 'elementor-toc__body',
-			]
-		);
-
-		$this->add_render_attribute(
-			'body',
-			[
-				'class' => 'elementor-toc__body',
-				'aria-expanded' => 'true',
-			]
-		);
+		$this->add_render_attribute( 'body', 'class', 'elementor-toc__body' );
 
 		if ( $settings['collapse_subitems'] ) {
 			$this->add_render_attribute( 'body', 'class', 'elementor-toc__list-items--collapsible' );
 		}
 
-		if ( 'yes' === $settings['minimize_box'] ) {
-			$this->add_render_attribute(
-				'expand-button',
-				[
-					'class' => 'elementor-toc__toggle-button elementor-toc__toggle-button--expand',
-					'role' => 'button',
-					'tabindex' => '0',
-					'aria-label' => esc_html__( 'Open table of contents', 'elementor-pro' ),
-				]
-			);
-			$this->add_render_attribute(
-				'collapse-button',
-				[
-					'class' => 'elementor-toc__toggle-button elementor-toc__toggle-button--collapse',
-					'role' => 'button',
-					'tabindex' => '0',
-					'aria-label' => esc_html__( 'Close table of contents', 'elementor-pro' ),
-				]
-			);
-		}
-
 		$html_tag = Utils::validate_html_tag( $settings['html_tag'] );
 		?>
-		<div <?php $this->print_render_attribute_string( 'header' ); ?>>
+		<div class="elementor-toc__header">
 			<<?php Utils::print_validated_html_tag( $html_tag ); ?> class="elementor-toc__header-title">
 				<?php $this->print_unescaped_setting( 'title' ); ?>
 			</<?php Utils::print_validated_html_tag( $html_tag ); ?>>
 			<?php if ( 'yes' === $settings['minimize_box'] ) : ?>
-				<div <?php $this->print_render_attribute_string( 'expand-button' ); ?>><?php Icons_Manager::render_icon( $settings['expand_icon'], [ 'aria-hidden' => 'true' ] ); ?></div>
-				<div <?php $this->print_render_attribute_string( 'collapse-button' ); ?>><?php Icons_Manager::render_icon( $settings['collapse_icon'], [ 'aria-hidden' => 'true' ] ); ?></div>
+				<div class="elementor-toc__toggle-button elementor-toc__toggle-button--expand"><?php Icons_Manager::render_icon( $settings['expand_icon'] ); ?></div>
+				<div class="elementor-toc__toggle-button elementor-toc__toggle-button--collapse"><?php Icons_Manager::render_icon( $settings['collapse_icon'] ); ?></div>
 			<?php endif; ?>
 		</div>
 		<div <?php $this->print_render_attribute_string( 'body' ); ?>>

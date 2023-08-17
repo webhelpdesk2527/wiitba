@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Products_Deprecated
  *
- * @deprecated 2.4.1 Use `Products` class instead.
+ * @deprecated 2.4.1 use Products
  */
 class Products_Deprecated extends Products_Base {
 

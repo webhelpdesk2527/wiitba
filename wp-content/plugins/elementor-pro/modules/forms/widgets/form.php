@@ -738,7 +738,6 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Icon Spacing', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'range' => [
 					'px' => [
 						'max' => 50,
@@ -760,9 +759,6 @@ class Form extends Form_Base {
 				'label' => esc_html__( 'Button ID', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => '',
-				'ai' => [
-					'active' => false,
-				],
 				'title' => esc_html__( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'elementor-pro' ),
 				'description' => esc_html__( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows `A-z 0-9` & underscore chars without spaces.', 'elementor-pro' ),
 				'separator' => 'before',
@@ -912,28 +908,12 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Form ID', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
-				'ai' => [
-					'active' => false,
-				],
 				'placeholder' => 'new_form_id',
 				'description' => esc_html__( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows `A-z 0-9` & underscore chars without spaces.', 'elementor-pro' ),
 				'separator' => 'after',
 				'dynamic' => [
 					'active' => true,
 				],
-			]
-		);
-
-		$this->add_control(
-			'form_validation',
-			[
-				'label' => esc_html__( 'Form Validation', 'elementor-pro' ),
-				'type' => Controls_Manager::SELECT,
-				'options' => [
-					'' => esc_html__( 'Browser Default', 'elementor-pro' ),
-					'custom' => esc_html__( 'Custom', 'elementor-pro' ),
-				],
-				'default' => '',
 			]
 		);
 
@@ -971,7 +951,7 @@ class Form extends Form_Base {
 		$this->add_control(
 			'error_message',
 			[
-				'label' => esc_html__( 'Form Error', 'elementor-pro' ),
+				'label' => esc_html__( 'Error Message', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => $default_messages[ Ajax_Handler::ERROR ],
 				'placeholder' => $default_messages[ Ajax_Handler::ERROR ],
@@ -987,12 +967,12 @@ class Form extends Form_Base {
 		);
 
 		$this->add_control(
-			'server_message',
+			'required_field_message',
 			[
-				'label' => esc_html__( 'Server Error', 'elementor-pro' ),
+				'label' => esc_html__( 'Required Message', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
-				'default' => $default_messages[ Ajax_Handler::SERVER_ERROR ],
-				'placeholder' => $default_messages[ Ajax_Handler::SERVER_ERROR ],
+				'default' => $default_messages[ Ajax_Handler::FIELD_REQUIRED ],
+				'placeholder' => $default_messages[ Ajax_Handler::FIELD_REQUIRED ],
 				'label_block' => true,
 				'condition' => [
 					'custom_messages!' => '',
@@ -1007,32 +987,13 @@ class Form extends Form_Base {
 		$this->add_control(
 			'invalid_message',
 			[
-				'label' => esc_html__( 'Invalid Form', 'elementor-pro' ),
+				'label' => esc_html__( 'Invalid Message', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => $default_messages[ Ajax_Handler::INVALID_FORM ],
 				'placeholder' => $default_messages[ Ajax_Handler::INVALID_FORM ],
 				'label_block' => true,
 				'condition' => [
 					'custom_messages!' => '',
-				],
-				'render_type' => 'none',
-				'dynamic' => [
-					'active' => true,
-				],
-			]
-		);
-
-		$this->add_control(
-			'required_field_message',
-			[
-				'label' => esc_html__( 'Required Field', 'elementor-pro' ),
-				'type' => Controls_Manager::TEXT,
-				'default' => $default_messages[ Ajax_Handler::FIELD_REQUIRED ],
-				'placeholder' => $default_messages[ Ajax_Handler::FIELD_REQUIRED ],
-				'label_block' => true,
-				'condition' => [
-					'custom_messages!' => '',
-					'form_validation' => 'custom',
 				],
 				'render_type' => 'none',
 				'dynamic' => [
@@ -1056,7 +1017,6 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Columns Gap', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'default' => [
 					'size' => 10,
 				],
@@ -1078,7 +1038,6 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Rows Gap', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'default' => [
 					'size' => 10,
 				],
@@ -1110,7 +1069,6 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Spacing', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'default' => [
 					'size' => 0,
 				],
@@ -1185,7 +1143,6 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Spacing', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'default' => [
 					'size' => 0,
 				],
@@ -1295,7 +1252,7 @@ class Form extends Form_Base {
 				'label' => esc_html__( 'Border Width', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'placeholder' => '1',
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-field-group:not(.elementor-field-type-upload) .elementor-field:not(.elementor-select-wrapper)' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					'{{WRAPPER}} .elementor-field-group .elementor-select-wrapper select' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -1308,7 +1265,7 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-field-group:not(.elementor-field-type-upload) .elementor-field:not(.elementor-select-wrapper)' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					'{{WRAPPER}} .elementor-field-group .elementor-select-wrapper select' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -1582,7 +1539,7 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -1595,7 +1552,7 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Text Padding', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -1694,7 +1651,6 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Spacing', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'default' => [
 					'size' => 20,
 				],
@@ -1715,9 +1671,9 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Icon Size', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'default' => [
 					'size' => 15,
+					'unit' => 'px',
 				],
 				'range' => [
 					'px' => [
@@ -1725,6 +1681,7 @@ class Form extends Form_Base {
 						'max' => 100,
 					],
 				],
+				'size_units' => [ 'px' ],
 				'conditions' => [
 					'terms' => [
 						[
@@ -1748,9 +1705,9 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Padding', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
 				'default' => [
 					'size' => 30,
+					'unit' => 'px',
 				],
 				'range' => [
 					'px' => [
@@ -1758,6 +1715,7 @@ class Form extends Form_Base {
 						'max' => 100,
 					],
 				],
+				'size_units' => [ 'px' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--e-form-steps-indicator-padding: {{SIZE}}{{UNIT}}',
 				],
@@ -1898,9 +1856,9 @@ class Form extends Form_Base {
 				'label' => esc_html__( 'Divider Width', 'elementor-pro' ),
 				'separator' => 'before',
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
 				'default' => [
 					'size' => 1,
+					'unit' => 'px',
 				],
 				'range' => [
 					'px' => [
@@ -1908,6 +1866,7 @@ class Form extends Form_Base {
 						'max' => 100,
 					],
 				],
+				'size_units' => [ 'px' ],
 				'condition' => [
 					'step_type!' => 'progress_bar',
 				],
@@ -1922,9 +1881,9 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Divider Gap', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
 					'size' => 10,
+					'unit' => 'px',
 				],
 				'range' => [
 					'px' => [
@@ -1936,6 +1895,7 @@ class Form extends Form_Base {
 						'max' => 100,
 					],
 				],
+				'size_units' => [ 'px', '%' ],
 				'condition' => [
 					'step_type!' => 'progress_bar',
 				],
@@ -1984,9 +1944,9 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Height', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'vh', 'custom' ],
 				'default' => [
 					'size' => 20,
+					'unit' => 'px',
 				],
 				'range' => [
 					'px' => [
@@ -1994,6 +1954,7 @@ class Form extends Form_Base {
 						'max' => 100,
 					],
 				],
+				'size_units' => [ 'px' ],
 				'condition' => [
 					'step_type' => 'progress_bar',
 				],
@@ -2008,9 +1969,9 @@ class Form extends Form_Base {
 			[
 				'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
 					'size' => 0,
+					'unit' => 'px',
 				],
 				'range' => [
 					'px' => [
@@ -2018,6 +1979,7 @@ class Form extends Form_Base {
 						'max' => 100,
 					],
 				],
+				'size_units' => [ 'px', '%', 'em' ],
 				'condition' => [
 					'step_type' => 'progress_bar',
 				],
@@ -2164,10 +2126,6 @@ class Form extends Form_Base {
 
 		if ( ! empty( $instance['form_name'] ) ) {
 			$this->add_render_attribute( 'form', 'name', $instance['form_name'] );
-		}
-
-		if ( 'custom' === $instance['form_validation'] ) {
-			$this->add_render_attribute( 'form', 'novalidate' );
 		}
 
 		if ( ! empty( $instance['button_css_id'] ) ) {
@@ -2326,19 +2284,7 @@ class Form extends Form_Base {
 	 */
 	protected function content_template() {
 		?>
-		<#
-		view.addRenderAttribute(
-			'form',
-			{
-				'id': settings.form_id,
-				'name': settings.form_name,
-			}
-		);
-		if ( 'custom' === settings.form_validation ) {
-			view.addRenderAttribute( 'form', 'novalidate' );
-		}
-		#>
-		<form class="elementor-form" {{{ view.getRenderAttributeString( 'form' ) }}}>
+		<form class="elementor-form" id="{{settings.form_id}}" name="{{settings.form_name}}">
 			<div class="elementor-form-fields-wrapper elementor-labels-{{settings.label_position}}">
 				<#
 					for ( var i in settings.form_fields ) {

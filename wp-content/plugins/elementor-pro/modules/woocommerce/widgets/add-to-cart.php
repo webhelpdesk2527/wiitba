@@ -4,7 +4,6 @@ namespace ElementorPro\Modules\Woocommerce\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Widget_Button;
 use ElementorPro\Base\Base_Widget_Trait;
-use ElementorPro\Core\Utils;
 use ElementorPro\Modules\QueryControl\Module;
 use ElementorPro\Modules\Woocommerce\Traits\Product_Id_Trait;
 
@@ -175,8 +174,7 @@ class Add_To_Cart extends Widget_Button {
 			$product_id = $settings['product_id'];
 		} elseif ( wp_doing_ajax() && ! empty( $settings['product_id'] ) ) {
 			// PHPCS - No nonce is required.
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing
-			$product_id = (int) Utils::_unstable_get_super_global_value( $_POST, 'post_id' );
+			$product_id = $_POST['post_id']; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		} else {
 			$product_id = get_queried_object_id();
 		}

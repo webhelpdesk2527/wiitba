@@ -2,7 +2,6 @@
 namespace ElementorPro\Modules\Forms\Actions;
 
 use Elementor\Controls_Manager;
-use ElementorPro\Core\Utils;
 use ElementorPro\Modules\Forms\Classes\Action_Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -36,9 +35,6 @@ class Discord extends Action_Base {
 				'label' => esc_html__( 'Webhook URL', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
 				'placeholder' => 'https://discordapp.com/api/webhooks/',
-				'ai' => [
-					'active' => false,
-				],
 				'label_block' => true,
 				'separator' => 'before',
 				'description' => esc_html__( 'Enter the webhook URL that will receive the form\'s submitted data.', 'elementor-pro' ) . ' ' . sprintf( '<a href="%s" target="_blank">%s</a>.', 'https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks', esc_html__( 'Click here for Instructions', 'elementor-pro' ) ),
@@ -54,9 +50,6 @@ class Discord extends Action_Base {
 			[
 				'label' => esc_html__( 'Username', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
-				'ai' => [
-					'active' => false,
-				],
 				'dynamic' => [
 					'active' => true,
 				],
@@ -68,9 +61,6 @@ class Discord extends Action_Base {
 			[
 				'label' => esc_html__( 'Avatar URL', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
-				'ai' => [
-					'active' => false,
-				],
 				'dynamic' => [
 					'active' => true,
 				],
@@ -82,9 +72,6 @@ class Discord extends Action_Base {
 			[
 				'label' => esc_html__( 'Title', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
-				'ai' => [
-					'active' => false,
-				],
 				'dynamic' => [
 					'active' => true,
 				],
@@ -96,9 +83,6 @@ class Discord extends Action_Base {
 			[
 				'label' => esc_html__( 'Description', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
-				'ai' => [
-					'active' => false,
-				],
 				'dynamic' => [
 					'active' => true,
 				],
@@ -157,9 +141,7 @@ class Discord extends Action_Base {
 		}
 
 		// PHPCS - The form is a visitor action and doesn't require a nonce.
-		$referrer = Utils::_unstable_get_super_global_value( $_POST, 'referrer' ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
-
-		$page_url = $referrer ? esc_url( $referrer ) : site_url();
+		$page_url = isset( $_POST['referrer'] ) ? esc_url( $_POST['referrer'] ) : site_url(); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$color = isset( $settings['discord_webhook_color'] ) ? hexdec( ltrim( $settings['discord_webhook_color'], '#' ) ) : hexdec( '9c0244' );
 
 		// Build discord  webhook data
@@ -214,7 +196,7 @@ class Discord extends Action_Base {
 		]);
 
 		if ( 204 !== (int) wp_remote_retrieve_response_code( $response ) ) {
-			throw new \Exception( 'Webhook error.' );
+			throw new \Exception( esc_html__( 'Webhook Error', 'elementor-pro' ) );
 		}
 	}
 }

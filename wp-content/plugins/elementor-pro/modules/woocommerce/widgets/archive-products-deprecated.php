@@ -13,8 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Archive_Products_Deprecated
- *
- * @deprecated 2.4.1 Use `Archive_Products` instead.
+ * @deprecated 2.4.1 use Archive_Products
  */
 class Archive_Products_Deprecated extends Products {
 

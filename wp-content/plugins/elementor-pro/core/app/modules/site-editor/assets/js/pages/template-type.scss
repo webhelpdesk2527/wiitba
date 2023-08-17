@@ -1,13 +1,9 @@
 .e-site-editor__templates {
 	.page-header {
-		margin-block-end: spacing(10);
-
-		> a {
-			align-self: baseline;
-		}
+		margin-bottom: spacing(10)
 	}
 
 	.eps-separator {
-		margin-block-end: spacing(44);
+		margin-bottom: spacing(44);
 	}
 }

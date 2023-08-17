@@ -24,7 +24,7 @@ class Nav_Menu extends Base_Widget {
 	}
 
 	public function get_title() {
-		return esc_html__( 'WordPress Menu', 'elementor-pro' );
+		return esc_html__( 'Nav Menu', 'elementor-pro' );
 	}
 
 	public function get_icon() {
@@ -36,11 +36,17 @@ class Nav_Menu extends Base_Widget {
 	}
 
 	public function get_keywords() {
-		return [ 'menu', 'nav', 'button', 'nav menu' ];
+		return [ 'menu', 'nav', 'button' ];
 	}
 
 	public function get_script_depends() {
 		return [ 'smartmenus' ];
+	}
+
+	public function on_export( $element ) {
+		unset( $element['settings']['menu'] );
+
+		return $element;
 	}
 
 	protected function get_nav_menu_index() {
@@ -124,7 +130,7 @@ class Nav_Menu extends Base_Widget {
 		$this->add_control(
 			'align_items',
 			[
-				'label' => esc_html__( 'Alignment', 'elementor-pro' ),
+				'label' => esc_html__( 'Align', 'elementor-pro' ),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
@@ -360,7 +366,7 @@ class Nav_Menu extends Base_Widget {
 		$this->add_control(
 			'text_align',
 			[
-				'label' => esc_html__( 'Text  Align', 'elementor-pro' ),
+				'label' => esc_html__( 'Align', 'elementor-pro' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'aside',
 				'options' => [
@@ -755,7 +761,6 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Width', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
 				'range' => [
 					'px' => [
 						'min' => 1,
@@ -774,7 +779,7 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Height', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vh', 'custom' ],
+				'size_units' => [ '%', 'px' ],
 				'range' => [
 					'px' => [
 						'min' => 1,
@@ -820,7 +825,6 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Pointer Width', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'range' => [
 					'px' => [
 						'max' => 30,
@@ -848,7 +852,6 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Horizontal Padding', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'range' => [
 					'px' => [
 						'max' => 50,
@@ -865,7 +868,6 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Vertical Padding', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'range' => [
 					'px' => [
 						'max' => 50,
@@ -882,7 +884,6 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Space Between', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'range' => [
 					'px' => [
 						'max' => 100,
@@ -900,7 +901,7 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-item:before' => 'border-radius: {{SIZE}}{{UNIT}}',
 					'{{WRAPPER}} .e--animation-shutter-in-horizontal .elementor-item:before' => 'border-radius: {{SIZE}}{{UNIT}} {{SIZE}}{{UNIT}} 0 0',
@@ -1071,7 +1072,7 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-nav-menu--dropdown' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					'{{WRAPPER}} .elementor-nav-menu--dropdown li:first-child a' => 'border-top-left-radius: {{TOP}}{{UNIT}}; border-top-right-radius: {{RIGHT}}{{UNIT}};',
@@ -1096,7 +1097,6 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Horizontal Padding', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-nav-menu--dropdown a' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}}',
 				],
@@ -1110,7 +1110,6 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Vertical Padding', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'range' => [
 					'px' => [
 						'max' => 50,
@@ -1145,7 +1144,7 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Border Width', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'range' => [
 					'px' => [
 						'max' => 50,
@@ -1168,7 +1167,6 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Distance', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'range' => [
 					'px' => [
 						'min' => -100,
@@ -1285,7 +1283,7 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Border Width', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'range' => [
 					'px' => [
 						'max' => 20,
@@ -1305,7 +1303,7 @@ class Nav_Menu extends Base_Widget {
 			[
 				'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-menu-toggle' => 'border-radius: {{SIZE}}{{UNIT}}',
 				],
@@ -1389,6 +1387,11 @@ class Nav_Menu extends Base_Widget {
 		}
 
 		$is_migrated = isset( $settings['__fa4_migrated']['submenu_icon'] );
+
+		$this->add_render_attribute( 'main-menu', [
+			'migration_allowed' => Icons_Manager::is_migration_allowed() ? '1' : '0',
+			'migrated' => $is_migrated ? '1' : '0',
+		] );
 
 		if ( 'dropdown' !== $settings['layout'] ) :
 			$this->add_render_attribute( 'main-menu', 'class', [
@@ -1555,53 +1558,4 @@ class Nav_Menu extends Base_Widget {
 	}
 
 	public function render_plain_content() {}
-
-	public function on_export( $element ) {
-		$slug = $element['settings']['menu'] ?? '';
-		$menu_object = wp_get_nav_menu_object( $slug );
-
-		if ( ! $menu_object instanceof \WP_Term ) {
-			unset( $element['settings']['menu'] );
-			return $element;
-		}
-
-		$menu_id = $menu_object->term_id ?? 0;
-
-		if ( ! empty( $menu_id ) ) {
-			$element['settings']['menu_id'] = $menu_id;
-		}
-
-		return $element;
-	}
-
-	/**
-	 * When importing a menu, if the menu has a slug that already exists, we add "-duplicate" to the slug of the imported menu.
-	 * Upon importing a menu widget, we replace the slug to the correct one by fetching it from the correct ID in the $data array.
-	 *
-	 * Please take note that this function overrides On_Import_Trait::on_import_update_dynamic_content().
-	 *
-	 * @param array $element_config
-	 * @param array $data
-	 * @param $controls
-	 *
-	 * @return array
-	 */
-	public static function on_import_update_dynamic_content( array $element_config, array $data, $controls = null ) : array {
-		$old_menu_id = $element_config['settings']['menu_id'] ?? 0;
-
-		if ( empty( $old_menu_id ) ) {
-			return $element_config;
-		}
-
-		$new_menu_id = $data['term_ids'][ $old_menu_id ] ?? 0;
-		$new_slug = wp_get_nav_menu_object( $new_menu_id )->slug ?? '';
-
-		if ( ! empty( $new_slug ) ) {
-			$element_config['settings']['menu'] = $new_slug;
-		}
-
-		unset( $element_config['settings']['menu_id'] );
-
-		return $element_config;
-	}
 }

@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<# screens.forEach( function( screen ) { #>
 		<div class="elementor-publish__tab" data-screen="{{ screen.name }}">
 			<div class="elementor-publish__tab__image">
-				<img src="{{ screen.image }}" loading="lazy">
+				<img src="{{ screen.image }}">
 			</div>
 			<div class="elementor-publish__tab__content">
 				<div class="elementor-publish__tab__title">{{{ screen.title }}}</div>
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<# jQuery.each( tabs, ( tab, args ) => { #>
 		<div class="elementor-component-tab elementor-publish__tab" data-tab="{{ tab }}">
 			<div class="elementor-publish__tab__image">
-				<img src="{{ args.image }}" loading="lazy">
+				<img src="{{ args.image }}">
 			</div>
 			<div class="elementor-publish__tab__content">
 				<div class="elementor-publish__tab__title">{{{ args.title }}}</div>
@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <script type="text/template" id="tmpl-elementor-theme-builder-conditions-view">
 	<div class="elementor-template-library-blank-icon">
-		<img src="<?php echo ELEMENTOR_PRO_MODULES_URL; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>theme-builder/assets/images/conditions-tab.svg" loading="lazy">
+		<img src="<?php echo ELEMENTOR_PRO_MODULES_URL; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>theme-builder/assets/images/conditions-tab.svg">
 	</div>
 	<div class="elementor-template-library-blank-title">
 		{{ sprintf(

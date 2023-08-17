@@ -15,14 +15,6 @@ class Module extends DynamicTags\Module {
 
 	const ACF_GROUP = 'acf';
 
-	// TODO: Remove when Core 3.10.0 is released.
-	const DATETIME_CATEGORY = 'datetime';
-
-	/**
-	 * @var Dynamic_Value_Provider
-	 */
-	private static $dynamic_value_provider;
-
 	/**
 	 * @param array $types
 	 *
@@ -129,7 +121,6 @@ class Module extends DynamicTags\Module {
 			'ACF_File',
 			'ACF_Number',
 			'ACF_Color',
-			'ACF_Date_Time',
 		];
 	}
 
@@ -137,14 +128,22 @@ class Module extends DynamicTags\Module {
 	public static function get_tag_value_field( Base_Tag $tag ) {
 		$key = $tag->get_settings( 'key' );
 
-		// TODO: The tags should use the `Dynamic_Value_Provider::get_value()` method, but it involves
-		//  heavily refactoring them, so currently this method is just a proxy and also kept for BC.
+		if ( ! empty( $key ) ) {
+			list( $field_key, $meta_key ) = explode( ':', $key );
+			$document = Plugin::elementor()->documents->get_current();
 
-		if ( ! static::$dynamic_value_provider ) {
-			static::$dynamic_value_provider = new Dynamic_Value_Provider();
+			if ( 'options' === $field_key ) {
+				$field = get_field_object( $meta_key, $field_key );
+			} elseif ( ! empty( $document ) && 'loop-item' == $document::get_type() ) {
+				$field = get_field_object( $field_key, get_the_ID() );
+			} else {
+				$field = get_field_object( $field_key, get_queried_object() );
+			}
+
+			return [ $field, $meta_key ];
 		}
 
-		return static::$dynamic_value_provider->get_value( $key );
+		return [];
 	}
 
 	public function get_groups() {

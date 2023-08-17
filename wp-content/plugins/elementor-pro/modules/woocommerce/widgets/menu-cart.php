@@ -9,8 +9,6 @@ use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
 use ElementorPro\Modules\Woocommerce\Module;
-use Elementor\Utils;
-use Elementor\Group_Control_Image_Size;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -58,45 +56,10 @@ class Menu_Cart extends Base_Widget {
 					'bag-light' => esc_html__( 'Bag', 'elementor-pro' ) . ' ' . esc_html__( 'Light', 'elementor-pro' ),
 					'bag-medium' => esc_html__( 'Bag', 'elementor-pro' ) . ' ' . esc_html__( 'Medium', 'elementor-pro' ),
 					'bag-solid' => esc_html__( 'Bag', 'elementor-pro' ) . ' ' . esc_html__( 'Solid', 'elementor-pro' ),
-					'custom' => esc_html__( 'Custom', 'elementor-pro' ),
 				],
 				'default' => 'cart-medium',
 				'prefix_class' => 'toggle-icon--', // Prefix class not used anymore, but kept for BC reasons.
 				'render_type' => 'template',
-			]
-		);
-
-		$this->add_control(
-			'menu_icon_svg',
-			[
-				'label' => esc_html__( 'Custom Icon', 'elementor-pro' ),
-				'type' => Controls_Manager::ICONS,
-				'fa4compatibility' => 'icon_active',
-				'default' => [
-					'value' => 'fas fa-shopping-cart',
-					'library' => 'fa-solid',
-				],
-				'skin_settings' => [
-					'inline' => [
-						'none' => [
-							'label' => 'None',
-						],
-					],
-				],
-				'recommended' => [
-					'fa-solid' => [
-						'shopping-bag',
-						'shopping-basket',
-						'shopping-cart',
-						'cart-arrow-down',
-						'cart-plus',
-					],
-				],
-				'skin' => 'inline',
-				'label_block' => false,
-				'condition' => [
-					'icon' => 'custom',
-				],
 			]
 		);
 
@@ -273,7 +236,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Distance', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'size_units' => [ '%', 'px' ],
 				'range' => [
 					'px' => [
 						'min' => -300,
@@ -312,44 +275,10 @@ class Menu_Cart extends Base_Widget {
 				'return_value' => 'yes',
 				'default' => 'yes',
 				'selectors' => [
-					'{{WRAPPER}} .elementor-menu-cart__close-button, {{WRAPPER}} .elementor-menu-cart__close-button-custom' => '{{VALUE}}',
+					'{{WRAPPER}} .elementor-menu-cart__close-button' => '{{VALUE}}',
 				],
 				'selectors_dictionary' => [
 					'' => 'display: none;',
-				],
-			]
-		);
-
-		$this->add_control(
-			'close_cart_icon_svg',
-			[
-				'label' => esc_html__( 'Custom Icon', 'elementor-pro' ),
-				'type' => Controls_Manager::ICONS,
-				'fa4compatibility' => 'icon_active',
-				'skin_settings' => [
-					'inline' => [
-						'none' => [
-							'label' => 'Default',
-							'icon' => 'fas fa-times',
-						],
-						'icon' => [
-							'icon' => 'eicon-star',
-						],
-					],
-				],
-				'recommended' => [
-					'fa-regular' => [
-						'times-circle',
-					],
-					'fa-solid' => [
-						'times',
-						'times-circle',
-					],
-				],
-				'skin' => 'inline',
-				'label_block' => false,
-				'condition' => [
-					'close_cart_button_show!' => '',
 				],
 			]
 		);
@@ -377,7 +306,7 @@ class Menu_Cart extends Base_Widget {
 					'end' => 'margin-left: auto',
 				],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-menu-cart__close-button, {{WRAPPER}} .elementor-menu-cart__close-button-custom' => '{{VALUE}};',
+					'{{WRAPPER}} .elementor-menu-cart__close-button' => '{{VALUE}};',
 				],
 			]
 		);
@@ -754,6 +683,9 @@ class Menu_Cart extends Base_Widget {
 				'selectors' => [
 					'{{WRAPPER}}' => '--toggle-button-icon-color: {{VALUE}};',
 				],
+				'condition' => [
+					'icon!' => 'custom',
+				],
 			]
 		);
 
@@ -813,6 +745,9 @@ class Menu_Cart extends Base_Widget {
 				'selectors' => [
 					'{{WRAPPER}}' => '--toggle-button-icon-hover-color: {{VALUE}};',
 				],
+				'condition' => [
+					'icon!' => 'custom',
+				],
 			]
 		);
 
@@ -855,7 +790,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Border Width', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
+				'size_units' => [ 'px', 'em', '%' ],
 				'range' => [
 					'px' => [
 						'max' => 20,
@@ -876,13 +811,13 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'range' => [
 					'px' => [
 						'min' => 0,
 						'max' => 100,
 					],
 				],
+				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--toggle-button-border-radius: {{SIZE}}{{UNIT}}',
 				],
@@ -919,13 +854,13 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Size', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'range' => [
 					'px' => [
 						'min' => 0,
 						'max' => 50,
 					],
 				],
+				'size_units' => [ '%', 'px', 'em' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--toggle-icon-size: {{SIZE}}{{UNIT}};',
 				],
@@ -937,13 +872,13 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Spacing', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
 				'range' => [
 					'px' => [
 						'min' => 0,
 						'max' => 50,
 					],
 				],
+				'size_units' => [ 'em', 'px' ],
 				'selectors' => [
 					'body:not(.rtl) {{WRAPPER}} .elementor-menu-cart__toggle .elementor-button-text' => 'margin-right: {{SIZE}}{{UNIT}};',
 					'body.rtl {{WRAPPER}} .elementor-menu-cart__toggle .elementor-button-text' => 'margin-left: {{SIZE}}{{UNIT}};',
@@ -959,7 +894,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Padding', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
+				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--toggle-icon-padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -1010,7 +945,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Distance', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'size_units' => [ '%', 'px' ],
 				'range' => [
 					'em' => [
 						'min' => 0,
@@ -1074,7 +1009,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Width', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
+				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-menu-cart__main' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -1103,7 +1038,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--cart-border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -1123,7 +1058,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Padding', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
+				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--cart-padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -1147,7 +1082,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Icon Size', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'size_units' => [ '%', 'px' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--cart-close-icon-size: {{SIZE}}{{UNIT}};',
 				],
@@ -1230,7 +1165,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Icon Size', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
+				'size_units' => [ 'px' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--remove-item-button-size: {{SIZE}}{{UNIT}};',
 				],
@@ -1388,7 +1323,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Width', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
+				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} .widget_shopping_cart_content' => '--subtotal-divider-top-width: {{TOP}}{{UNIT}}; --subtotal-divider-right-width: {{RIGHT}}{{UNIT}}; --subtotal-divider-bottom-width: {{BOTTOM}}{{UNIT}}; --subtotal-divider-left-width: {{LEFT}}{{UNIT}};',
 				],
@@ -1603,7 +1538,6 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Weight', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'range' => [
 					'px' => [
 						'min' => 0,
@@ -1621,13 +1555,13 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Spacing', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'range' => [
 					'px' => [
 						'min' => 0,
 						'max' => 50,
 					],
 				],
+				'size_units' => [ '%', 'px' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--product-divider-gap: {{SIZE}}{{UNIT}};',
 				],
@@ -1689,7 +1623,6 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Space Between', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'range' => [
 					'px' => [
 						'min' => 0,
@@ -1722,7 +1655,6 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'range' => [
 					'px' => [
 						'min' => 0,
@@ -1878,7 +1810,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-menu-cart__footer-buttons a.elementor-button--view-cart' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -1904,7 +1836,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Padding', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
+				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--view-cart-button-padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -2057,7 +1989,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-menu-cart__footer-buttons a.elementor-button--checkout' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -2083,7 +2015,7 @@ class Menu_Cart extends Base_Widget {
 			[
 				'label' => esc_html__( 'Padding', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
+				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}}' => '--checkout-button-padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -2171,9 +2103,6 @@ class Menu_Cart extends Base_Widget {
 
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		if ( ! wp_script_is( 'wc-cart-fragments' ) ) {
-			wp_enqueue_script( 'wc-cart-fragments' );
-		}
 
 		$this->maybe_use_mini_cart_template();
 		Module::render_menu_cart( $settings );

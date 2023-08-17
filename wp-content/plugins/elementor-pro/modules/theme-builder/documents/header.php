@@ -11,7 +11,6 @@ class Header extends Header_Footer_Base {
 		$properties = parent::get_properties();
 
 		$properties['location'] = 'header';
-		$properties['support_lazyload'] = false;
 
 		return $properties;
 	}

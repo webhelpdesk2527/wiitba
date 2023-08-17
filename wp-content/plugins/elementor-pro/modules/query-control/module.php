@@ -3,11 +3,9 @@ namespace ElementorPro\Modules\QueryControl;
 
 use Elementor\Controls_Manager;
 use Elementor\Core\Common\Modules\Ajax\Module as Ajax;
-use Elementor\Core\Editor\Editor;
 use Elementor\TemplateLibrary\Source_Local;
 use Elementor\Widget_Base;
 use ElementorPro\Base\Module_Base;
-use ElementorPro\Core\Utils;
 use ElementorPro\Modules\QueryControl\Controls\Template_Query;
 use ElementorPro\Modules\QueryControl\Classes\Elementor_Post_Query;
 use ElementorPro\Modules\QueryControl\Classes\Elementor_Related_Query;
@@ -65,7 +63,7 @@ class Module extends Module_Base {
 	}
 
 	/**
-	 * @deprecated 2.5.0 Use `Group_Control_Query` class capabilities instead.
+	 * @deprecated use Group_Control_Query capabilities
 	 *
 	 * @param Widget_Base $widget
 	 */
@@ -414,10 +412,8 @@ class Module extends Module_Base {
 	 * @throws \Exception
 	 */
 	public function ajax_posts_filter_autocomplete_deprecated( $data ) {
-		$document = Utils::_unstable_get_document_for_edit( $data['editor_post_id'] );
-
 		if ( empty( $data['filter_type'] ) || empty( $data['q'] ) ) {
-			throw new \Exception( 'Bad request.' );
+			throw new \Exception( 'Bad Request' );
 		}
 
 		$results = [];
@@ -523,10 +519,6 @@ class Module extends Module_Base {
 	 * @throws \Exception
 	 */
 	public function ajax_posts_filter_autocomplete( array $data ) {
-		if ( ! current_user_can( Editor::EDITING_CAPABILITY ) ) {
-			throw new \Exception( 'Access denied.' );
-		}
-
 		$query_data = $this->autocomplete_query_data( $data );
 		if ( is_wp_error( $query_data ) ) {
 			/** @var \WP_Error $query_data */
@@ -605,16 +597,13 @@ class Module extends Module_Base {
 	}
 
 	/**
+	 * @deprecated 2.6.0 use new `autocomplete` format
+	 *
 	 * @param $request
 	 *
 	 * @return array
-	 * @throws \Exception
-	 * @deprecated 2.6.0 use new `autocomplete` format
-	 *
 	 */
 	public function ajax_posts_control_value_titles_deprecated( $request ) {
-		$document = Utils::_unstable_get_document_for_edit( $request['editor_post_id'] );
-
 		$ids = (array) $request['id'];
 
 		$results = [];
@@ -683,14 +672,7 @@ class Module extends Module_Base {
 		return $results;
 	}
 
-	/**
-	 * @throws \Exception
-	 */
 	public function ajax_posts_control_value_titles( $request ) {
-		if ( ! current_user_can( Editor::EDITING_CAPABILITY ) ) {
-			throw new \Exception( 'Access denied.' );
-		}
-
 		$query_data = $this->get_titles_query_data( $request );
 		if ( is_wp_error( $query_data ) ) {
 			return [];
@@ -922,7 +904,7 @@ class Module extends Module_Base {
 	}
 
 	/**
-	 * @deprecated 2.5.0 Use `Elementor_Post_Query` class capabilities instead.
+	 * @deprecated use Elementor_Post_Query capabilities
 	 *
 	 * @param string $control_id
 	 * @param array $settings
@@ -941,7 +923,7 @@ class Module extends Module_Base {
 	}
 
 	/**
-	 * @param \Elementor\Widget_Base $widget
+	 * @param \ElementorPro\Base\Base_Widget $widget
 	 * @param string $name
 	 * @param array $query_args
 	 * @param array $fallback_args

@@ -3,7 +3,6 @@ namespace ElementorPro\Modules\AssetsManager\AssetTypes;
 
 use Elementor\Core\Admin\Menu\Admin_Menu_Manager;
 use Elementor\Utils;
-use ElementorPro\Core\Utils as Pro_Utils;
 use Elementor\Core\Common\Modules\Ajax\Module as Ajax;
 use ElementorPro\Core\Behaviors\Feature_Lock;
 use ElementorPro\License\API;
@@ -249,20 +248,18 @@ class Fonts_Manager {
 	 * @throws \Exception
 	 */
 	public function assets_manager_panel_action_data( array $data ) {
-		$document = Pro_Utils::_unstable_get_document_for_edit( $data['editor_post_id'] );
-
 		if ( empty( $data['type'] ) ) {
-			throw new \Exception( 'Font type is required.' );
+			throw new \Exception( 'font_type_is_required' );
 		}
 
 		if ( empty( $data['font'] ) ) {
-			throw new \Exception( 'Font is required.' );
+			throw new \Exception( 'font_is_required' );
 		}
 
 		$asset = $this->get_font_type_object( $data['type'] );
 
 		if ( ! $asset ) {
-			throw new \Exception( 'Font type not found.' );
+			throw new \Exception( 'font_type_not_found' );
 		}
 
 		try {
@@ -444,10 +441,7 @@ class Fonts_Manager {
 		}
 
 		// Verify that the nonce is valid.
-		if ( ! wp_verify_nonce(
-			Pro_Utils::_unstable_get_super_global_value( $_POST, self::CPT . '_nonce' ),
-			self::CPT
-		) ) {
+		if ( ! wp_verify_nonce( $_POST[ self::CPT . '_nonce' ], self::CPT ) ) {
 			return $post_id;
 		}
 
@@ -458,8 +452,7 @@ class Fonts_Manager {
 		wp_set_object_terms( $post_id, $custom_font->get_type(), self::TAXONOMY );
 
 		// Let Font type handle saving
-		// Sanitize the whole $_POST array
-		$custom_font->save_meta( $post_id, Pro_Utils::_unstable_get_super_global_value( [ 'data' => $_POST ], 'data' ) );
+		$custom_font->save_meta( $post_id, $_POST );
 	}
 
 	/**

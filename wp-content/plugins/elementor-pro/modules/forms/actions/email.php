@@ -39,9 +39,6 @@ class Email extends Action_Base {
 				'label' => esc_html__( 'To', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => get_option( 'admin_email' ),
-				'ai' => [
-					'active' => false,
-				],
 				'placeholder' => get_option( 'admin_email' ),
 				'label_block' => true,
 				'title' => esc_html__( 'Separate emails with commas', 'elementor-pro' ),
@@ -61,9 +58,6 @@ class Email extends Action_Base {
 				'label' => esc_html__( 'Subject', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => $default_message,
-				'ai' => [
-					'active' => false,
-				],
 				'placeholder' => $default_message,
 				'label_block' => true,
 				'render_type' => 'none',
@@ -79,9 +73,6 @@ class Email extends Action_Base {
 				'label' => esc_html__( 'Message', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXTAREA,
 				'default' => '[all-fields]',
-				'ai' => [
-					'active' => false,
-				],
 				'placeholder' => '[all-fields]',
 				'description' => sprintf(
 					/* translators: %s: The [all-fields] shortcode. */
@@ -103,9 +94,6 @@ class Email extends Action_Base {
 				'label' => esc_html__( 'From Email', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => 'email@' . $site_domain,
-				'ai' => [
-					'active' => false,
-				],
 				'render_type' => 'none',
 				'dynamic' => [
 					'active' => true,
@@ -119,9 +107,6 @@ class Email extends Action_Base {
 				'label' => esc_html__( 'From Name', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => get_bloginfo( 'name' ),
-				'ai' => [
-					'active' => false,
-				],
 				'render_type' => 'none',
 				'dynamic' => [
 					'active' => true,
@@ -147,9 +132,6 @@ class Email extends Action_Base {
 				'label' => esc_html__( 'Cc', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => '',
-				'ai' => [
-					'active' => false,
-				],
 				'title' => esc_html__( 'Separate emails with commas', 'elementor-pro' ),
 				'render_type' => 'none',
 				'dynamic' => [
@@ -164,9 +146,6 @@ class Email extends Action_Base {
 				'label' => esc_html__( 'Bcc', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => '',
-				'ai' => [
-					'active' => false,
-				],
 				'title' => esc_html__( 'Separate emails with commas', 'elementor-pro' ),
 				'render_type' => 'none',
 				'dynamic' => [
